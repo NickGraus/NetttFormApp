@@ -30,15 +30,15 @@ export default {
    border-radius: 4px;
  }
  .primary {
-   background-image: linear-gradient(to right, #7D0FB0 , #BF1DC2);
+   background-color: #FCA311;
    color: white;
  }
 
  .secondary {
    background-color: #ffffff;
-   color: #9B15B8;
+   color: #FCA311;
    box-sizing: border-box;
-   box-shadow:0px 0px 0px 3px #9B15B8 inset;
+   box-shadow:0px 0px 0px 3px #FCA311 inset;
  }
 
 </style>
