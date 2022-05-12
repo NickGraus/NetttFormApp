@@ -17,10 +17,7 @@ export default {
     };
   },
 
-  props: {
-    btnName: String,
-    state: String,
-  },
+  props: {},
 
   methods: {}
 };

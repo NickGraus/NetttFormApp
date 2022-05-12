@@ -4,9 +4,12 @@
 
 <template>
   <div id="app">
-    <Button btnName="Button" state="secondary"></Button>
-    <Button btnName="Button" state="primary"></Button>
-    <Navbar></Navbar>
+    <Topbar title="Titel" state="search" />
+    <div class="main">
+      <Button btnName="Button" state="secondary"></Button>
+      <Button btnName="Button" state="primary"></Button>
+    </div>
+    <Navbar />
   </div>
 
 
@@ -15,10 +18,12 @@
 <script>
 import Button from "./components/BtnComp.vue";
 import Navbar from "./components/NavbarComp.vue";
+import Topbar from "./components/TopbarComp.vue";
 
 export default {
   name: "App",
   components: {
+    Topbar,
     Button,
     Navbar,
   },
@@ -49,5 +54,9 @@ body {
 }
  #app {
    font-family: "SF Pro Text";
+ }
+
+ .main {
+   padding: 16px;
  }
 </style>
