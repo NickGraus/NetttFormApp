@@ -11,12 +11,11 @@
       </div>
     </div>
     <div class="collapsed" v-if="isShow">
-      <div class="input-title">Datum uitvoering</div>
-      <input class="inputfield" v-model="message">
-      <div class="input-title">Uitvoerder</div>
-      <input class="inputfield" v-model="message">
-      <div class="input-title">Oppervlakte</div>
-      <input class="inputfield" v-model="message">
+      <InputField inputTitle="Datum uitvoering" fieldType="text" />
+      <InputField inputTitle="Uitvoerder" fieldType="text" />
+      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="ja" />
+      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="nee" />
+      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="misschien" />
     </div>
   </div>
 </template>
@@ -25,10 +24,13 @@
 
 <script>
 import Button from "./BtnComp.vue";
+import InputField from "./InputfieldComp.vue";
+
 export default {
   name: "collapseditemComp",
   components: {
     Button,
+    InputField,
   },
   data() {
     return {
@@ -60,17 +62,6 @@ export default {
 
 .collapsed {
   margin-top: 16px;
-}
-
-.collapsed .input-title {
-  margin-bottom: 4px;
-}
-
-
-.collapsed .inputfield {
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 30px;
 }
 
 .icon {

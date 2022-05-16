@@ -7,7 +7,7 @@
       {{title}}
     </div>
     <div class="searchForm" v-if="state === 'search'">
-      <input class="search inputfield" v-model="message" placeholder="zoeken">
+      <InputField fieldType="text" placeholder="zoeken" />
       <button class="searchButton" type="submit">search</button>
     </div>
   </div>
@@ -16,8 +16,14 @@
 
 
 <script>
+import InputField from "./InputfieldComp.vue";
+
+
 export default {
   name: "topbarComp",
+  components: {
+    InputField,
+  },
   data() {
     return {
     };
@@ -57,21 +63,12 @@ export default {
   box-sizing: border-box;
 }
 
-
-.inputfield {
-  padding: 8px 16px;
-  box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  -moz-box-shadow:    inset 4px 4px 10px -8px #000000;
-  -webkit-box-shadow: inset 4px 4px 10px -8px #000000;
-  box-shadow:         inset 4px 4px 10px -8px #000000;
-}
-
-.search.inputfield {
-  border-radius: 20px 0 0 20px;
+.searchForm input[type=text] {
   width: 75%;
   float:left;
+  border-radius: 20px 0 0 20px;
 }
+
 .searchButton {
   width: 25%;
   float:left;
