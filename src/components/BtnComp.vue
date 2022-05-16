@@ -1,5 +1,5 @@
 <template>
-  <div id="btn" :class="state">{{btnName}}</div>
+  <div id="btn" class="btn" :class="state">{{btnName}}</div>
 </template>
 
 
@@ -23,11 +23,11 @@ export default {
 
 <style>
  #btn {
-   padding: 16px;
+   padding: 8px 16px;
    display: inline-block;
    font-size: 14px;
    text-align: center;
-   border-radius: 4px;
+   border-radius: 32px;
  }
  .primary {
    background-color: #FCA311;
@@ -38,7 +38,7 @@ export default {
    background-color: #ffffff;
    color: #FCA311;
    box-sizing: border-box;
-   box-shadow:0px 0px 0px 3px #FCA311 inset;
+   box-shadow:0px 0px 0px 2.5px #FCA311 inset;
  }
 
 </style>

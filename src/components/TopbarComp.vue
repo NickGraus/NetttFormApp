@@ -7,7 +7,7 @@
       {{title}}
     </div>
     <div class="searchForm" v-if="state === 'search'">
-      <input class="searchField" v-model="message" placeholder="zoeken">
+      <input class="search inputfield" v-model="message" placeholder="zoeken">
       <button class="searchButton" type="submit">search</button>
     </div>
   </div>
@@ -58,18 +58,20 @@ export default {
 }
 
 
-.searchField {
-  width: 75%;
-  float:left;
+.inputfield {
   padding: 8px 16px;
   box-sizing: border-box;
-  border-radius: 20px 0 0 20px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   -moz-box-shadow:    inset 4px 4px 10px -8px #000000;
   -webkit-box-shadow: inset 4px 4px 10px -8px #000000;
   box-shadow:         inset 4px 4px 10px -8px #000000;
 }
 
+.search.inputfield {
+  border-radius: 20px 0 0 20px;
+  width: 75%;
+  float:left;
+}
 .searchButton {
   width: 25%;
   float:left;
