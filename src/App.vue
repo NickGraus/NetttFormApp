@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <Topbar title="Titel" state="search" />
-    <div class="main">
-      <ListItem title="Titel" subtitle="" />
-      <CollapseItem />
-    </div>
-    <router-view></router-view>
+    <router-view class="main"></router-view>
     <Navbar />
   </div>
 
@@ -15,16 +11,12 @@
 <script>
 import Navbar from "./components/NavbarComp.vue";
 import Topbar from "./components/TopbarComp.vue";
-import ListItem from "./components/ListItemComp.vue";
-import CollapseItem from "./components/CollapseItemComp.vue";
 
 export default {
   name: "App",
   components: {
     Topbar,
     Navbar,
-    ListItem,
-    CollapseItem,
   },
   data() {
     return {};

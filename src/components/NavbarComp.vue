@@ -4,7 +4,7 @@
       <router-link to="/">
         <div class="menu-item"></div>
       </router-link>
-      <router-link to="/about">
+      <router-link to="/customers">
         <div class="menu-item"></div>
       </router-link>
     </div>
