@@ -1,19 +1,18 @@
 <template>
-  <div class="inspections">
-      <ListItem title="Titel" subtitle="" />
-    <CollapseItem />
-    </div>
+  <Section sectionTitle="Secties" />
+  <InfoSection sectionTitle="Project info" customer="Nettt Interactieve Media" form="Dakinspectie" date="2022-05-10" />
+  <Section sectionTitle="Inspectie instellingen" />
 </template>
 
 <script>
-import ListItem from "./../components/ListItemComp.vue";
-import CollapseItem from "./../components/CollapseItemComp.vue";
+import Section from "./../components/SectionComp.vue";
+import InfoSection from "../components/InfoSectionComp.vue";
 
 export default {
   name: "InspectionsView",
   components: {
-    ListItem,
-    CollapseItem,
+    Section,
+    InfoSection,
   },
   data() {
     return {};

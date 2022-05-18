@@ -47,6 +47,9 @@ export default {
   position:relative;
   display: block;
   overflow: auto;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
 }
 .title {
   font-size: 24px;

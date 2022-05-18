@@ -5,7 +5,9 @@
       <div class="item-subtitle">{{ subtitle }}</div>
     </div>
     <div class="download">D</div>
-    <div class="details">-></div>
+    <router-link to="/inspection">
+      <div class="menu-item">-></div>
+    </router-link>
   </div>
 </template>
 

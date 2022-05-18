@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style>
- #btn {
+ .btn {
    padding: 8px 16px;
    display: inline-block;
    font-size: 14px;

@@ -46,5 +46,10 @@ export default {
   height: 24px;
   width: 24px;
   background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.menu-item:hover, .menu-item:active {
+  background-color: #fca311;
 }
 </style>
