@@ -1,8 +1,12 @@
 <template>
   <div id="navbar" class="navbar">
     <div class="flexbox">
-      <div class="menu-item"></div>
-      <div class="menu-item"></div>
+      <router-link to="/">
+        <div class="menu-item"></div>
+      </router-link>
+      <router-link to="/about">
+        <div class="menu-item"></div>
+      </router-link>
     </div>
   </div>
 </template>

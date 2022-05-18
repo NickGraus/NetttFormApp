@@ -5,6 +5,7 @@
       <ListItem title="Titel" subtitle="" />
       <CollapseItem />
     </div>
+    <router-view></router-view>
     <Navbar />
   </div>
 

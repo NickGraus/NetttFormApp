@@ -14,8 +14,7 @@
       <InputField inputTitle="Datum uitvoering" fieldType="text" />
       <InputField inputTitle="Uitvoerder" fieldType="text" />
       <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="ja" />
-      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="nee" />
-      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="misschien" />
+<!--      <InputField inputTitle="Uitvoerder" fieldType="checkbox" name="test" label="misschien" />-->
     </div>
   </div>
 </template>
