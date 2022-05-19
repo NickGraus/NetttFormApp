@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="public/img/icon-144x144.png" />
+    <link rel="icon" href="/img/icon-144x144.png" />
       <link rel="manifest" href=manifest.json>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nettt Form Application Prototype</title>
@@ -10,5 +10,14 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <script type="module">
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
   </body>
 </html>

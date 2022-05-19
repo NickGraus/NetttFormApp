@@ -8,7 +8,7 @@
     </div>
     <div class="searchForm" v-if="state === 'search'">
       <InputField fieldType="text" placeholder="zoeken" />
-      <button class="searchButton" type="submit">search</button>
+      <button class="searchButton" type="submit"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="m11.25 11.25l3 3"/><circle cx="7.5" cy="7.5" r="4.75"/></g></svg></button>
     </div>
   </div>
 </template>
@@ -67,22 +67,22 @@ export default {
 }
 
 .searchForm input[type=text] {
-  width: 75%;
+  width: 80%;
   float:left;
   border-radius: 20px 0 0 20px;
 }
 
 .searchButton {
-  width: 25%;
+  width: 20%;
   float:left;
-  padding: 8px 16px;
+  padding: 0 20px 0 16px;
   box-sizing: border-box;
   background-color: #FCA311;
   border-radius: 0 20px 20px 0;
   border: 1px solid transparent;
   border-right: 1px solid transparent;
   color: #ffffff;
-
+  height: 33px;
 }
 
 </style>

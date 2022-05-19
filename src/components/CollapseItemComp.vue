@@ -6,8 +6,12 @@
       </div>
       <Button v-if="isShow" btnName="Oplaan" state="primary"/>
       <div class="details" @click="isShow = !isShow">
-        <div v-if="!isShow" class="icon">V</div>
-        <div v-else class="icon upside-down">V</div>
+        <div v-if="!isShow" class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"/></svg>
+        </div>
+        <div v-else class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"/></svg>
+        </div>
       </div>
     </div>
     <div class="collapsed" v-if="isShow">
@@ -66,14 +70,6 @@ export default {
 .icon {
   margin-right: -16px;
 }
-.upside-down {
-  display: inline;
-  -moz-transform: scale(-1, -1);
-  -webkit-transform: scale(-1, -1);
-  -o-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-  margin-right: 0;
-}
+
 
 </style>

@@ -17,6 +17,8 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
+    "@iconify-icons/fluent": "^1.2.8",
+    "@iconify/vue": "^3.2.1",
     "@rushstack/eslint-patch": "^1.1.0",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vue/cli-plugin-pwa": "^5.0.4",

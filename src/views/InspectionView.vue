@@ -2,13 +2,16 @@
   <Section sectionTitle="Secties" />
   <InfoSection sectionTitle="Project info" customer="Nettt Interactieve Media" form="Dakinspectie" date="2022-05-10" />
   <Section sectionTitle="Inspectie instellingen" />
+  <CollapseItem />
   <Scrum />
+
 </template>
 
 <script>
 import Section from "./../components/SectionComp.vue";
 import InfoSection from "../components/InfoSectionComp.vue";
 import Scrum from "../components/ScrumComp.vue";
+import CollapseItem  from "../components/CollapseItemComp.vue";
 
 export default {
   name: "InspectionView",
@@ -16,6 +19,7 @@ export default {
     Section,
     InfoSection,
     Scrum,
+    CollapseItem,
   },
   data() {
     return {};

@@ -50,6 +50,6 @@ body {
  }
 
  .main {
-   padding: 16px;
+   padding: 140px 16px 16px;
  }
 </style>
