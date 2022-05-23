@@ -1,5 +1,5 @@
 <template>
-  <div id="btn" class="btn" :class="state">{{btnName}}</div>
+  <div id="btn" class="btn" :class="state">{{btnName}}hello</div>
 </template>
 
 

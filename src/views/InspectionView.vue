@@ -1,5 +1,5 @@
 <template>
-  <Section sectionTitle="Secties" />
+  <Section :sectionTitle="item.name" />
   <InfoSection sectionTitle="Project info" customer="Nettt Interactieve Media" form="Dakinspectie" date="2022-05-10" />
   <Section sectionTitle="Inspectie instellingen" />
   <CollapseItem />
@@ -22,9 +22,16 @@ export default {
     CollapseItem,
   },
   data() {
-    return {};
+    return {
+      items: [],
+    };
   },
-
+  mounted() {
+    fetch("http://nick-api.test/api/inspection")
+        .then(res => res.json())
+        .then(data => this.items = data.data)
+        .catch(err => console.log(err.message))
+  },
   props: {},
 
   methods: {},

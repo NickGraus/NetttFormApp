@@ -7,11 +7,11 @@ import Inspection from '@/views/InspectionView.vue'
 const routes = [
     {path: '/', name: 'Inspections', component: Inspections},
     {path: '/customers', name: 'Customers', component: Customers},
-    {path: '/inspection', name: 'Customers', component: Inspection},
+    {path: '/inspection', name: 'Inspection', component: Inspection},
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('configure-admin'),
     routes,
 })
 

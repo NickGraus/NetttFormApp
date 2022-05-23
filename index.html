@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/img/icon-144x144.png" />
-      <link rel="manifest" href=manifest.json>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nettt Form Application Prototype</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-    <script type="module">
-        // Check that service workers are supported
-        if ('serviceWorker' in navigator) {
-            // Use the window load event to keep the page load performant
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js');
-            });
-        }
-    </script>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Your app title</title>
+        <meta name="description" content="Your app description">
+        <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+        <link rel="alternate icon" href="/img/favicon.ico" type="image/png" sizes="16x16">
+        <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" sizes="180x180">
+        <link rel="mask-icon" href="/img/favicon-32x32.png" color="#FFFFFF">
+        <meta name="theme-color" content="#ffffff">
+        <title>Nettt Form Application Prototype</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="module" src="/src/main.js"></script>
+        <script type="module">
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
+    </body>
 </html>

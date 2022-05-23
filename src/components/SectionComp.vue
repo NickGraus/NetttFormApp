@@ -2,12 +2,13 @@
   <div id="section" class="section">
     <div class="sectiontitle" v-if="sectionTitle !== ''">{{ sectionTitle }}</div>
     <div class="list">
-      <ListItem v-for="item in items" :key="item.id" :title="'Inspectie ' + item.key" subtitle=""></ListItem>
+      <ListItem v-for="item in items" :key="item.id" :title="item.name" subtitle=""></ListItem>
     </div>
   </div>
 </template>
 
 <script>
+
 import ListItem from "./ListItemComp.vue";
 
 export default {
@@ -17,15 +18,21 @@ export default {
   },
   data() {
     return {
-      items: [{key: 1}, {key: 2}, {key: 3}]
+      items: [],
     };
   },
-
+  mounted() {
+    fetch("http://nick-api.test/api/inspection")
+        .then(res => res.json())
+        .then(data => this.items = data.data)
+        .catch(err => console.log(err.message))
+  },
   props: {
     sectionTitle: String,
   },
 
-  methods: {}
+  methods: {
+  }
 };
 </script>
 
