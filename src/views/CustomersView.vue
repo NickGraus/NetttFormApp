@@ -1,5 +1,6 @@
 <template>
   <div class="customers">
+    hallo
     <ListItem v-for="item in items" :key="item.id" :title="item.name" subtitle=""></ListItem>
   </div>
 </template>

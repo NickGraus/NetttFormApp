@@ -5,7 +5,10 @@
       <div class="label customer">Klant:</div>
       <div class="name customer">{{ customer }}</div>
       <div class="label form label">Formulier:</div>
-      <div class="name form">{{ form }}</div>
+      <div class="name form" v-if="form === 1">Dakrapportage</div>
+      <div class="name form" v-else-if="form === 2">RI&E Rapportage</div>
+      <div class="name form" v-else-if="form === 3">Condition Research</div>
+      <div class="name form" v-else>Onbekend</div>
       <div class="label date label">Datum:</div>
       <div class="name date">{{ date }}</div>
     </div>

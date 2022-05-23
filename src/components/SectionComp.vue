@@ -2,7 +2,7 @@
   <div id="section" class="section">
     <div class="sectiontitle" v-if="sectionTitle !== ''">{{ sectionTitle }}</div>
     <div class="list">
-      <ListItem v-for="item in items" :key="item.id" :title="item.name" subtitle=""></ListItem>
+      <ListItem v-for="item in items" :key="item.id" :id="item.id" :title="item.name" subtitle=""></ListItem>
     </div>
   </div>
 </template>
