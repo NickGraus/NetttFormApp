@@ -1,7 +1,12 @@
 <template>
   <div class="customers">
     hallo
-    <ListItem v-for="item in items" :key="item.id" :title="item.name" subtitle=""></ListItem>
+    <ListItem
+      v-for="item in items"
+      :key="item.id"
+      :title="item.name"
+      subtitle=""
+    ></ListItem>
   </div>
 </template>
 
@@ -16,9 +21,9 @@ export default {
   },
   mounted() {
     fetch("http://nick-api.test/api/inspection")
-        .then(res => res.json())
-        .then(data => this.items = data.data)
-        .catch(err => console.log(err.message))
+      .then((res) => res.json())
+      .then((data) => (this.items = data.data))
+      .catch((err) => console.log(err.message));
   },
   props: {},
 

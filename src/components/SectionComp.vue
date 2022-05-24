@@ -1,18 +1,26 @@
 <template>
   <div id="section" class="section">
-    <div class="sectiontitle" v-if="sectionTitle !== ''">{{ sectionTitle }}</div>
+    hello
+    <div class="sectiontitle" v-if="sectionTitle !== ''">
+      {{ sectionTitle }}
+    </div>
     <div class="list">
-      <ListItem v-for="item in items" :key="item.id" :id="item.id" :title="item.name" subtitle=""></ListItem>
+      <ListItem
+        v-for="item in items"
+        :key="item.id"
+        :id="item.id"
+        :title="item.name"
+        subtitle=""
+      ></ListItem>
     </div>
   </div>
 </template>
 
 <script>
-
 import ListItem from "./ListItemComp.vue";
 
 export default {
-  name: 'sectionComp',
+  name: "sectionComp",
   components: {
     ListItem,
   },
@@ -23,16 +31,15 @@ export default {
   },
   mounted() {
     fetch("http://nick-api.test/api/inspection")
-        .then(res => res.json())
-        .then(data => this.items = data.data)
-        .catch(err => console.log(err.message))
+      .then((res) => res.json())
+      .then((data) => (this.items = data.data))
+      .catch((err) => console.log(err.message));
   },
   props: {
     sectionTitle: String,
   },
 
-  methods: {
-  }
+  methods: {},
 };
 </script>
 
@@ -44,5 +51,4 @@ export default {
   color: #fca311;
   font-size: 9pt;
 }
-
 </style>

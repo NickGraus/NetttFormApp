@@ -1,6 +1,8 @@
 <template>
   <div id="section" class="section">
-    <div class="sectiontitle" v-if="sectionTitle !== ''">{{ sectionTitle }}</div>
+    <div class="sectiontitle" v-if="sectionTitle !== ''">
+      {{ sectionTitle }}
+    </div>
     <div class="block">
       <div class="label customer">Klant:</div>
       <div class="name customer">{{ customer }}</div>
@@ -17,12 +19,10 @@
 
 <script>
 export default {
-  name: 'infoSectionComp',
-  components: {
-  },
+  name: "infoSectionComp",
+  components: {},
   data() {
-    return {
-    };
+    return {};
   },
 
   props: {
@@ -32,7 +32,7 @@ export default {
     date: String,
   },
 
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -48,12 +48,10 @@ export default {
 }
 
 .label {
-  color: #14213D;
+  color: #14213d;
 }
 
 .name {
   color: #ffffff;
 }
-
-
 </style>

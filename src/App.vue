@@ -6,8 +6,6 @@
     </div>
     <Navbar />
   </div>
-
-
 </template>
 
 <script>
@@ -34,22 +32,20 @@ export default {
 </script>
 
 <style>
-
-
 @font-face {
   font-family: "SF Pro Text";
-  src: local("SF Pro Text"), url("./fonts/SFProText-Semibold.ttf") format("truetype");
+  src: local("SF Pro Text"),
+    url("./fonts/SFProText-Semibold.ttf") format("truetype");
 }
-
 
 body {
   margin: 0;
 }
- #app {
-   font-family: "SF Pro Text";
- }
+#app {
+  font-family: "SF Pro Text";
+}
 
- .main {
-   padding: 140px 16px 16px;
- }
+.main {
+  padding: 140px 16px 16px;
+}
 </style>

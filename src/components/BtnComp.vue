@@ -1,15 +1,12 @@
 <template>
-  <div id="btn" class="btn" :class="state">{{btnName}}hello</div>
+  <div id="btn" class="btn" :class="state">{{ btnName }}hello</div>
 </template>
-
-
 
 <script>
 export default {
-  name: 'btnComp',
+  name: "btnComp",
   data() {
-    return {
-    };
+    return {};
   },
 
   props: {
@@ -17,28 +14,27 @@ export default {
     state: String,
   },
 
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style>
- .btn {
-   padding: 8px 16px;
-   display: inline-block;
-   font-size: 14px;
-   text-align: center;
-   border-radius: 32px;
- }
- .primary {
-   background-color: #FCA311;
-   color: white;
- }
+.btn {
+  padding: 8px 16px;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 32px;
+}
+.primary {
+  background-color: #fca311;
+  color: white;
+}
 
- .secondary {
-   background-color: #ffffff;
-   color: #FCA311;
-   box-sizing: border-box;
-   box-shadow:0px 0px 0px 2.5px #FCA311 inset;
- }
-
+.secondary {
+  background-color: #ffffff;
+  color: #fca311;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 0px 2.5px #fca311 inset;
+}
 </style>
