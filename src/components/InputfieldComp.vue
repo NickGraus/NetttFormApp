@@ -41,7 +41,6 @@ export default {
   margin-bottom: 4px;
 }
 
-
 input[type=text]  {
   width: 100%;
   margin-bottom: 10px;

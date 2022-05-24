@@ -1,7 +1,9 @@
 <template>
   <div id="topbar" class="topbar" :class="state">
     <div class="extended" v-if="state !== 'default'">
-    back
+      <svg class="back"  @click="goBack" v-if="this.$route.name !== 'Inspections'" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+        <path d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0z"/>
+      </svg>
     </div>
     <div class="title">
       {{title}}
@@ -34,7 +36,11 @@ export default {
     state: String,
   },
 
-  methods: {}
+  methods: {
+    goBack() {
+      return this.$router.go(-1);
+    }
+  }
 };
 </script>
 
@@ -81,8 +87,11 @@ export default {
   border-radius: 0 20px 20px 0;
   border: 1px solid transparent;
   border-right: 1px solid transparent;
-  color: #ffffff;
   height: 33px;
+}
+
+.searchButton svg {
+  color: #ffffff;
 }
 
 </style>
