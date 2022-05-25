@@ -5,9 +5,8 @@
     :form="item.form_type"
     :date="item.inspection_date"
   />
-  <Section v-for="section in item.sections" :id="section.id" :sectionTitle="section.name">
-  </Section>
-
+  <Section :sectionTitle="item.section_1_name" />
+  <CollapseItem />
   <Scrum />
 </template>
 

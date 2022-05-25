@@ -18,7 +18,7 @@
           />
         </svg>
       </router-link>
-      <router-link to="/customers">
+      <router-link to="/customer">
         <svg
           class="menu-item"
           xmlns="http://www.w3.org/2000/svg"

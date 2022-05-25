@@ -1,39 +1,31 @@
 <template>
   <div id="section" class="section">
-    hello
     <div class="sectiontitle" v-if="sectionTitle !== ''">
       {{ sectionTitle }}
     </div>
-    <div class="list">
-      <ListItem
-        v-for="item in items"
-        :key="item.id"
-        :id="item.id"
-        :title="item.name"
-        subtitle=""
-      ></ListItem>
-    </div>
+    <CollapseItem v-for="item in items.sections" :title="item.name"></CollapseItem>
   </div>
 </template>
 
 <script>
-import ListItem from "./ListItemComp.vue";
+import CollapseItem from "./CollapseItemComp.vue";
 
 export default {
   name: "sectionComp",
   components: {
-    ListItem,
+    CollapseItem,
   },
   data() {
     return {
       items: [],
+      id: this.$route.params.id,
     };
   },
   mounted() {
-    fetch("http://nick-api.test/api/inspection")
-      .then((res) => res.json())
-      .then((data) => (this.items = data.data))
-      .catch((err) => console.log(err.message));
+    fetch("https://app-api.nettt.nl/api/inspection/" + this.id)
+        .then((res) => res.json())
+        .then((data) => (this.items = data.data))
+        .catch((err) => console.log(err.message));
   },
   props: {
     sectionTitle: String,

@@ -1,28 +1,33 @@
 <template>
   <div class="customers">
-    hallo
     <ListItem
-      v-for="item in items"
-      :key="item.id"
-      :title="item.name"
-      subtitle=""
+      v-for="customer in customers.slice(0, 5)"
+      :key="customer.id"
+      :id="customer.id"
+      :title="customer.name"
+      type="customer"
     ></ListItem>
   </div>
 </template>
 
 <script>
+import ListItem from "@/components/ListItemComp";
+
 export default {
   name: "InspectionView",
-  components: {},
+  components: {
+    ListItem,
+  },
   data() {
     return {
-      items: [],
+      customers: [],
     };
   },
   mounted() {
-    fetch("http://nick-api.test/api/inspection")
+    fetch("https://nick-api.test/api/inspection")
       .then((res) => res.json())
-      .then((data) => (this.items = data.data))
+      .then((data) => (this.customers = data.data))
+      .then(console.log(this.customers))
       .catch((err) => console.log(err.message));
   },
   props: {},

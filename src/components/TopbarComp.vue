@@ -4,7 +4,9 @@
       <svg
         class="back"
         @click="goBack"
-        v-if="this.$route.name !== 'Inspections'"
+        v-if="
+          this.$route.name !== 'Inspections' && this.$route.name !== 'Customers'
+        "
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         role="img"
@@ -18,7 +20,15 @@
         />
       </svg>
     </div>
-    <div class="title">
+    <div
+      class="title"
+      v-if="
+        this.$route.name === 'Inspections' || this.$route.name === 'Customers'
+      "
+    >
+      {{ this.$route.name }}
+    </div>
+    <div class="title" v-else>
       {{ title }}
     </div>
     <div class="searchForm" v-if="state === 'search'">

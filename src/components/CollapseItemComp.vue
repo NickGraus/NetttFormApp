@@ -2,7 +2,7 @@
   <div id="collapseItem" class="collapseItem" :class="state">
     <div class="grid">
       <div class="content">
-        <div class="collapse item-title">{{ title }}Joa</div>
+        <div class="collapse item-title">{{ title }}</div>
       </div>
       <Button v-if="isShow" btnName="Oplaan" state="primary" />
       <div class="details" @click="isShow = !isShow">
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="collapsed" v-if="isShow">
-      <InputField inputTitle="Datum uitvoering" fieldType="text" />
+      <InputField :inputTitle="this.name" fieldType="text" />
       <InputField inputTitle="Uitvoerder" fieldType="text" />
       <InputField
         inputTitle="Uitvoerder"

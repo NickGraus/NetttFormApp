@@ -1,20 +1,31 @@
 <template>
-  <Section sectionTitle="" />
+  <div class="list">
+    <ListItem
+      v-for="item in items.slice(0, 20)"
+      :key="item.id"
+      :id="item.id"
+      :title="item.name"
+      subtitle=""
+      type="inspection"
+    ></ListItem>
+  </div>
 </template>
 
 <script>
-import Section from "./../components/SectionComp.vue";
+import ListItem from "./../components/ListItemComp.vue";
 
 export default {
   name: "InspectionsView",
   components: {
-    Section,
+    ListItem,
   },
   data() {
-    return {};
+    return {
+      items: [],
+    };
   },
   mounted() {
-    fetch("http://nick-api.test/api/inspection/" + this.id)
+    fetch("https://app-api.nettt.nl/api/inspection")
       .then((res) => res.json())
       .then((data) => (this.items = data.data))
       .catch((err) => console.log(err.message));

@@ -1,11 +1,11 @@
 <template>
-  <router-link :to="{ path: '/inspection/' + id }">
+  <router-link :to="{ path: 'inspection/' + id }">
     <div id="listItem" class="listItem">
       <div class="content" :class="subtitle ? 'vertical-center' : ''">
         <div class="item-title">{{ title.substring(0, 20) + "..." }}</div>
         <div class="item-subtitle">{{ subtitle }}</div>
       </div>
-      <div class="download">
+      <div :class="'download ' + type" v-if="type === 'inspection'">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
@@ -50,6 +50,7 @@ export default {
     title: String,
     subtitle: String,
     id: String,
+    type: String,
   },
 
   methods: {},
