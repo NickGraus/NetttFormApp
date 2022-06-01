@@ -1,37 +1,33 @@
 <template>
-  <InfoSection
-    sectionTitle="Project info"
-    :customer="item.customer_name"
-    :form="item.form_type"
-    :date="item.inspection_date"
-  />
-  <Section :sectionTitle="item.section_1_name" />
-  <CollapseItem />
-  <Scrum />
+  <label>name</label>
+  <input type="text" :value="item.name">
+  <label>Adres:</label>
+  <input type="text" :value="item.address">
+  <label>Stad:</label>
+  <input type="text" :value="item.city">
+  <label>Land:</label>
+  <input type="text" :value="item.country">
+  <Scrum update="update" />
 </template>
 
 <script>
-import Section from "./../components/SectionComp.vue";
-import InfoSection from "../components/InfoSectionComp.vue";
 import Scrum from "../components/ScrumComp.vue";
-import CollapseItem from "../components/CollapseItemComp.vue";
+import BtnComp from "../components/BtnComp.vue"
 
 export default {
   name: "InspectionView",
   components: {
-    Section,
-    InfoSection,
     Scrum,
-    CollapseItem,
+    BtnComp,
   },
   data() {
     return {
       item: [],
-      id: this.$route.params.id,
+      id: this.$route.params.customer_id,
     };
   },
   mounted() {
-    fetch("https://app-api.nettt.nl/api/inspection/" + this.id)
+    fetch("https://app-api.nettt.nl/api/customer/" + this.id)
       .then((res) => res.json())
       .then((data) => (this.item = data.data))
       .catch((err) => console.log(err.message));

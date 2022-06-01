@@ -7,42 +7,16 @@
       <Button v-if="isShow" btnName="Oplaan" state="primary" />
       <div class="details" @click="isShow = !isShow">
         <div v-if="!isShow" class="icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            role="img"
-            width="1em"
-            height="1em"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 1024 1024"
-          >
-            <path
-              fill="currentColor"
-              d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"
-            />
-          </svg>
+          <Icon class="icon blue" :icon="icons.arrowIosDownwardFill" />
         </div>
         <div v-else class="icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            role="img"
-            width="1em"
-            height="1em"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 1024 1024"
-          >
-            <path
-              fill="currentColor"
-              d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z"
-            />
-          </svg>
+          <Icon class="icon blue" :icon="icons.arrowIosUpwardFill" />
         </div>
       </div>
     </div>
     <div class="collapsed" v-if="isShow">
-      <InputField :inputTitle="this.name" fieldType="text" />
-      <InputField inputTitle="Uitvoerder" fieldType="text" />
+      <InputField v-for="field in fields" :inputTitle="field.name" :placeholder="field.name" fieldType="text" />
+      <InputField inputTitle="Uitvoerder" placeholder="" fieldType="text" />
       <InputField
         inputTitle="Uitvoerder"
         fieldType="radio"
@@ -55,24 +29,40 @@
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
+import arrowIosDownwardFill from '@iconify-icons/eva/arrow-ios-downward-fill';
+import arrowIosUpwardFill from '@iconify-icons/eva/arrow-ios-upward-fill';
+
 import Button from "./BtnComp.vue";
 import InputField from "./InputfieldComp.vue";
 
 export default {
   name: "collapseditemComp",
   components: {
+    Icon,
     Button,
     InputField,
   },
   data() {
     return {
+      icons: {
+        arrowIosDownwardFill,
+        arrowIosUpwardFill,
+      },
       isShow: false,
+      inspection_id: this.$route.params.id,
     };
   },
+  mounted() {
+    fetch("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
+        .then((res) => res.json())
+        .then((data) => (this.fields = data.data.sections))
+        .catch((err) => console.log(err.message));  },
 
   props: {
     title: String,
     subtitle: String,
+    state: String,
   },
 
   methods: {},
@@ -95,7 +85,4 @@ export default {
   margin-top: 16px;
 }
 
-.icon {
-  margin-right: -16px;
-}
 </style>

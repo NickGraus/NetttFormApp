@@ -1,55 +1,42 @@
 <template>
-  <router-link :to="{ path: 'inspection/' + id }">
-    <div id="listItem" class="listItem">
+  <router-link :to="{ path: '/' + type + '/' + id }">
+    <div id="listItem" class="listItem" :class="type !== 'inspection' ? ' no-gap' : ''">
       <div class="content" :class="subtitle ? 'vertical-center' : ''">
         <div class="item-title">{{ title.substring(0, 20) + "..." }}</div>
         <div class="item-subtitle">{{ subtitle }}</div>
       </div>
       <div :class="'download ' + type" v-if="type === 'inspection'">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          role="img"
-          width="1em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M3.5 13h9a.75.75 0 0 1 .102 1.493l-.102.007h-9a.75.75 0 0 1-.102-1.493L3.5 13h9h-9ZM7.898 1.007L8 1a.75.75 0 0 1 .743.648l.007.102v7.688l2.255-2.254a.75.75 0 0 1 .977-.072l.084.072a.75.75 0 0 1 .072.977l-.072.084L8.53 11.78a.75.75 0 0 1-.976.073l-.084-.073l-3.536-3.535a.75.75 0 0 1 .977-1.133l.084.072L7.25 9.44V1.75a.75.75 0 0 1 .648-.743L8 1l-.102.007Z"
-          />
-        </svg>
+        <Icon class="icon blue" :icon="Icons.arrowDownload48Filled" />
       </div>
-      <svg
-        class="next"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        role="img"
-        width="1em"
-        height="1em"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 1024 1024"
-      >
-        <path
-          fill="currentColor"
-          d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"
-        />
-      </svg>
+      <Icon class="icon blue" :icon="Icons.arrowIosForwardFill" />
     </div>
   </router-link>
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
+import arrowIosForwardFill from '@iconify-icons/eva/arrow-ios-forward-fill';
+import arrowDownload48Filled from '@iconify-icons/fluent/arrow-download-48-filled';
+
+
 export default {
-  name: "listitemComp",
+  name: "listItemComp",
+  components: {
+    Icon,
+  },
   data() {
-    return {};
+    return {
+      Icons: {
+        arrowIosForwardFill,
+        arrowDownload48Filled
+      }
+    };
   },
 
   props: {
     title: String,
     subtitle: String,
-    id: String,
+    id: Number,
     type: String,
   },
 
@@ -64,6 +51,11 @@ export default {
   grid-template-columns: 1fr auto auto;
   grid-column-gap: 16px;
   border-bottom: 1px solid #fca311;
+  align-items: center;
+}
+
+.no-gap {
+  grid-column-gap: 0;
 }
 
 .content {
@@ -72,6 +64,7 @@ export default {
   justify-content: start;
   align-items: center;
 }
+
 .vertical-center {
   display: unset;
 }

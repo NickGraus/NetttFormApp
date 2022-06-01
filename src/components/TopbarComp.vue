@@ -1,24 +1,11 @@
 <template>
   <div id="topbar" class="topbar" :class="state">
     <div class="extended" v-if="state !== 'default'">
-      <svg
-        class="back"
-        @click="goBack"
-        v-if="
-          this.$route.name !== 'Inspections' && this.$route.name !== 'Customers'
-        "
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        role="img"
-        width="1em"
-        height="1em"
-        preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 1024 1024"
-      >
-        <path
-          d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0z"
-        />
-      </svg>
+      <Icon class="icon back blue"
+            :icon="icons.arrowLeftBold"
+            @click="goBack"
+            v-if="this.$route.name !== 'Inspections' && this.$route.name !== 'Customers'
+      " />
     </div>
     <div
       class="title"
@@ -34,41 +21,34 @@
     <div class="searchForm" v-if="state === 'search'">
       <InputField fieldType="text" placeholder="zoeken" />
       <button class="searchButton" type="submit">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          role="img"
-          width="1em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 16 16"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-          >
-            <path d="m11.25 11.25l3 3" />
-            <circle cx="7.5" cy="7.5" r="4.75" />
-          </g>
-        </svg>
+        <Icon class="icon" :icon="icons.searchIcon" />
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import { Icon } from '@iconify/vue';
+
+import searchIcon from '@iconify-icons/fe/search';
+import arrowLeftBold from '@iconify-icons/ep/arrow-left-bold';
+
 import InputField from "./InputfieldComp.vue";
+
 
 export default {
   name: "topbarComp",
   components: {
     InputField,
+    Icon,
   },
   data() {
-    return {};
+    return {
+      icons: {
+        searchIcon,
+        arrowLeftBold,
+      },
+    };
   },
 
   props: {
@@ -130,7 +110,7 @@ export default {
   height: 33px;
 }
 
-.searchButton svg {
-  color: #ffffff;
+.blue {
+  color: #14213d;
 }
 </style>

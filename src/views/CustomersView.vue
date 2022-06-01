@@ -24,7 +24,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://nick-api.test/api/inspection")
+    fetch("https://app-api.nettt.nl/api/customer")
       .then((res) => res.json())
       .then((data) => (this.customers = data.data))
       .then(console.log(this.customers))

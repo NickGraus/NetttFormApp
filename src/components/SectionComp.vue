@@ -3,7 +3,7 @@
     <div class="sectiontitle" v-if="sectionTitle !== ''">
       {{ sectionTitle }}
     </div>
-    <CollapseItem v-for="item in items.sections" :title="item.name"></CollapseItem>
+    <CollapseItem v-for="item in items.sections" :title="item.name" :section_id="item.id"></CollapseItem>
   </div>
 </template>
 
@@ -18,11 +18,11 @@ export default {
   data() {
     return {
       items: [],
-      id: this.$route.params.id,
+      inspection_id: this.$route.params.id,
     };
   },
   mounted() {
-    fetch("https://app-api.nettt.nl/api/inspection/" + this.id)
+    fetch("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
         .then((res) => res.json())
         .then((data) => (this.items = data.data))
         .catch((err) => console.log(err.message));

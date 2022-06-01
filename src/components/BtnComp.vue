@@ -1,5 +1,5 @@
 <template>
-  <div id="btn" class="btn" :class="state">{{ btnName }}hello</div>
+  <div id="btn" class="btn" :class="state">{{ btnName }}</div>
 </template>
 
 <script>
@@ -12,6 +12,10 @@ export default {
   props: {
     btnName: String,
     state: String,
+    method: { type: Function },
+  },
+  mounted() {
+    this.method();
   },
 
   methods: {},

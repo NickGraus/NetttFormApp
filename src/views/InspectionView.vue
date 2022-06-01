@@ -1,11 +1,11 @@
 <template>
   <InfoSection
     sectionTitle="Project info"
-    :customer="item.customer_name"
-    :form="item.form_type"
-    :date="item.inspection_date"
+    :customer="sections.customer_name"
+    :form="sections.form_type"
+    :date="sections.inspection_date"
   />
-  <Section v-for="section in item.sections" :id="section.id" :sectionTitle="section.name">
+  <Section v-for="section in sections.sections" :section_id="section.id" :sectionTitle="section.name">
   </Section>
 
   <Scrum />
@@ -27,14 +27,14 @@ export default {
   },
   data() {
     return {
-      item: [],
-      id: this.$route.params.id,
+      sections: [],
+      inspection_id: this.$route.params.id,
     };
   },
   mounted() {
-    fetch("https://app-api.nettt.nl/api/inspection/" + this.id)
+    fetch("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
       .then((res) => res.json())
-      .then((data) => (this.item = data.data))
+      .then((data) => (this.sections = data.data))
       .catch((err) => console.log(err.message));
   },
   props: {},
