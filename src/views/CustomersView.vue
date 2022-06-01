@@ -1,7 +1,7 @@
 <template>
   <div class="customers">
     <ListItem
-      v-for="customer in customers.slice(0, 5)"
+      v-for="customer in customers.slice().reverse()"
       :key="customer.id"
       :id="customer.id"
       :title="customer.name"

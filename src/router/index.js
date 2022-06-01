@@ -4,13 +4,15 @@ import showInspections from "@/views/InspectionsView.vue";
 import Customers from "@/views/CustomersView.vue";
 import singleInspection from "@/views/InspectionView.vue";
 import singleCustomer from "@/views/CustomerView.vue";
+import newCustomer from "@/views/CustomerNewView.vue";
 
 const routes = [
   { path: "/", name: "Inspections", component: showInspections },
   { path: "/inspection/:id", name: "Inspection", component: singleInspection },
   { path: "/customers", name: "Customers", component: Customers },
   { path: "/customer/:customer_id", name: "Customer", component: singleCustomer },
-  // { path: "/customer/new", name: "CustomerNew", component: newCustomer },
+  { path: "/customer/new", name: "CustomerNew", component: newCustomer },
+
 ];
 
 const router = createRouter({

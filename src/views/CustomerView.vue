@@ -7,6 +7,8 @@
   <input type="text" :value="item.city">
   <label>Land:</label>
   <input type="text" :value="item.country">
+  <label>E-mail:</label>
+  <input type="text" :value="item.email">
   <Scrum update="update" />
 </template>
 

@@ -5,7 +5,7 @@
     :form="sections.form_type"
     :date="sections.inspection_date"
   />
-  <Section v-for="section in sections.sections" :section_id="section.id" :sectionTitle="section.name">
+  <Section v-for="section in sections.sections.slice().reverse()" :section_id="section.id" :sectionTitle="section.name">
   </Section>
 
   <Scrum />
