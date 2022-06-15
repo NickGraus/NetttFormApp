@@ -1,5 +1,19 @@
 <template>
   <div class="list">
+    <v-offline class="message"
+               @detected-condition="checkOnlineStatus"
+               online-class="online"
+               offline-class="offline"
+    >
+      <template v-if="online">
+        <div class="container">
+        </div>
+      </template>
+      <template v-if="!online">
+        <div class="container">
+        </div>
+      </template>
+    </v-offline>
     <ListItem
       v-for="item in items.slice(0, 20)"
       :key="item.id"
@@ -13,15 +27,19 @@
 
 <script>
 import ListItem from "./../components/ListItemComp.vue";
+import { VOffline } from "v-offline";
 
 export default {
   name: "InspectionsView",
   components: {
     ListItem,
+    VOffline,
   },
   data() {
     return {
       items: [],
+      offlineItems: [],
+      online: true,
     };
   },
   mounted() {
@@ -33,6 +51,11 @@ export default {
 
   props: {},
 
-  methods: {},
+  methods: {
+    checkOnlineStatus(e) {
+      this.online = e;
+      console.log(e);
+    },
+  },
 };
 </script>

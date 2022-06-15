@@ -5,7 +5,7 @@
     <div class="main">
       <offline-message></offline-message>
       <AddButton />
-      <router-view></router-view>
+      <router-view :getDatabase="getDatabase"></router-view>
     </div>
     <Navbar />
 
@@ -36,6 +36,7 @@ export default {
   },
   async created() {
     this.database = await this.getDatabase();
+    // this.saveCustomer();
   },
   mounted() {
     setTimeout(() => {
@@ -63,22 +64,10 @@ export default {
 
         db.onupgradeneeded = e => {
           e.target.result.createObjectStore("inspections", {keyPath: "key"});
+          e.target.result.createObjectStore("customers", {keyPath: "key"});
         }
       });
     },
-    async saveInspections() {
-      return new Promise((resolve, reject) => {
-        let transaction = this.database.transaction('inspections', 'readwrite');
-        transaction.oncomplete = e => {
-          resolve();
-        }
-
-        transaction.objectStore('inspections').add({
-          content: 'General Kenobi',
-          key: 4,
-        })
-      })
-    }
   }
 };
 </script>

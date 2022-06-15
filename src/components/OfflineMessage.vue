@@ -5,12 +5,12 @@
       offline-class="offline"
   >
     <template v-if="online">
-      <div class="container">
+      <div class="message-container">
         U bent momenteel online
       </div>
     </template>
     <template v-if="!online">
-      <div class="container">
+      <div class="message-container">
         U bent momenteel offline
       </div>
     </template>
@@ -50,9 +50,16 @@ export default {
   justify-content: center;
 }
 
-.message .container {
-  padding: 5px 16px;
+.offline .message-container {
+  background-color: #c4c4c4;
+}
+
+.online .message-container {
   background-color: #fca311;
+}
+
+.message .message-container {
+  padding: 5px 16px;
   border-radius: 20px;
   color: #14213d;
   text-align: center;
