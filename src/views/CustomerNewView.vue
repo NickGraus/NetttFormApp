@@ -11,8 +11,9 @@
       <input type="text" id="country" v-model="customer.country">
       <label for="email">E-mail:</label>
       <input type="text" id="email" v-model="customer.email">
-      <Scrum update="update" />
-      <button>Create Customer</button>
+      <button class="scrum-btn vertical-center">
+        <Icon class="icon" :icon="icons.save24Regular" />
+      </button>
     </form>
   </div>
 </template>
@@ -21,10 +22,15 @@
 import Scrum from "../components/ScrumComp.vue";
 import axios from 'axios';
 
+import { Icon } from '@iconify/vue';
+import save24Regular from '@iconify-icons/fluent/save-24-regular';
+import trashBinOutline from "@iconify-icons/ion/trash-bin-outline";
+
 export default {
   name: "CustomerNew",
   components: {
     Scrum,
+    Icon,
   },
   data() {
     return {
@@ -34,7 +40,11 @@ export default {
         city: "",
         country: "",
         email: "",
-      }
+      },
+      icons: {
+        save24Regular,
+        trashBinOutline,
+      },
     };
   },
   methods: {
@@ -46,3 +56,27 @@ export default {
   }
 };
 </script>
+
+<style>
+  button {
+    border: unset;
+  }
+  .scrum-btn {
+    background-color: #fca311;
+    height: 44px;
+    width: 44px;
+    border-radius: 22px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .scrum-btn:hover {
+    background-color: #14213d;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .scrum-btn:hover svg {
+    color: #fca311;
+  }
+</style>

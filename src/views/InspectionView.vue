@@ -16,6 +16,8 @@ import Section from "./../components/SectionComp.vue";
 import InfoSection from "../components/InfoSectionComp.vue";
 import Scrum from "../components/ScrumComp.vue";
 import CollapseItem from "../components/CollapseItemComp.vue";
+import save24Regular from "@iconify-icons/fluent/save-24-regular";
+import trashBinOutline from "@iconify-icons/ion/trash-bin-outline";
 
 export default {
   name: "InspectionView",

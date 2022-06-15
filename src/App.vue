@@ -3,11 +3,12 @@
     <SplashView :isLoading="isLoading"></SplashView>
     <Topbar title="Titel" state="search" />
     <div class="main">
+      <offline-message></offline-message>
       <AddButton />
       <router-view></router-view>
     </div>
-
     <Navbar />
+
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import SplashView from "./views/SplashView.vue";
 import Navbar from "./components/NavbarComp.vue";
 import Topbar from "./components/TopbarComp.vue";
 import AddButton  from "./components/AddComp.vue";
+import OfflineMessage from "./components/OfflineMessage.vue"
 
 export default {
   name: "App",
@@ -24,6 +26,7 @@ export default {
     Topbar,
     Navbar,
     AddButton,
+    OfflineMessage
   },
   data() {
     return {
