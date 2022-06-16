@@ -1,29 +1,46 @@
 <template>
   <div class="customers">
     <button @click="saveCustomer">Save</button>
-    <ListItem
-      v-for="customer in customers.slice(0,10)"
-      :key="customer.id"
-      :id="customer.id"
-      :title="customer.name"
-      type="customer"
-    ></ListItem>
+      <div v-if="!isOffline" class="online">
+        Nu ben ik online
+        <ListItem
+            v-for="customer in customers"
+            :key="customer.id"
+            :id="customer.id"
+            :title="customer.name"
+            type="customer"
+        ></ListItem>
+      </div>
+      <div v-if="isOffline" class="offline">
+        <ListItem
+            v-for="customer in localCustomers"
+            :key="customer.id"
+            :id="customer.id"
+            :title="customer.name"
+            type="customer"
+        ></ListItem>
+      </div>
   </div>
 </template>
 
 <script>
 import ListItem from "@/components/ListItemComp";
 import axios from 'axios';
+import Button from  "@/components/BtnComp"
 
 export default {
   name: "InspectionView",
   components: {
     ListItem,
+    Button,
+
   },
   data() {
     return {
       customers: [],
+      localCustomers: [],
       database: null,
+      isOffline: !navigator.onLine
     };
   },
   props: {
@@ -32,67 +49,48 @@ export default {
 
   async created() {
     this.database = await this.getDatabase();
+    this.localCustomers = await this.getCustomers();
   },
+
   mounted() {
     axios
         .get("https://app-api.nettt.nl/api/customer")
         .then(response => (this.customers = response.data.data))
 
-    // fetch("https://app-api.nettt.nl/api/customer")
-    //   .then((res) => res.json())
-    //   .then((data) => (this.customers = data.data))
-    //   .then(console.log(this.customers))
-    //   .catch((err) => console.log(err.message));
+    window.addEventListener("offline", () => {
+      this.isOffline = true;
+    });
+    window.addEventListener("online", () => {
+      this.isOffline = false;
+    });
   },
+
   methods: {
-    // async saveCustomersLocal(db) {
-    //   var tx = db.transaction("customers", "readwrite");
-    //   var store = tx.objectStore("customers")
-    //   var item = {
-    //     name: "hello",
-    //     price: 5,
-    //     disc: "there",
-    //   };
-    //   store.add(item);
-    //   return tx.complete;
-    // },
     async saveCustomer() {
       return new Promise((resolve, reject) => {
         let transaction = this.database.transaction('customers', 'readwrite');
         transaction.oncomplete = e => {
           resolve();
         }
-
-        transaction.objectStore('customers').add({
-          key: customer.id,
-          name: customer.name,
-          address: customer.address,
-          city: customer.city,
-          country: customer.country,
-          email: customer.email,
+        this.customers.forEach(customer => {
+          transaction.objectStore('customers').add({
+            key: customer.id,
+            name: customer.name,
+        })
         })
       })
-    }
-    // async saveValues() {
-    //   // eslint-disable-next-line no-unused-vars
-    //   return new Promise((resolve, reject) => {
-    //     let transaction = this.database.transaction("customers", "readwrite");
-    //     // eslint-disable-next-line no-unused-vars
-    //     transaction.oncomplete = e => {
-    //       resolve();
-    //     }
-    //     this.customers.forEach(customer => {
-    //       transaction.objectStore("customers").add({
-    //         key: customer.id,
-    //         name: customer.name,
-    //         address: customer.address,
-    //         city: customer.city,
-    //         country: customer.country,
-    //         email: customer.email,
-    //       })
-    //     })
-    //   })
-    // }
+    },
+    async getCustomers() {
+      return new Promise((resolve) => {
+        let transaction = this.database.transaction("customers", "readonly");
+        let customerStore = transaction.objectStore("customers")
+        let customers = customerStore.getAll();
+
+        customers.onsuccess = e => {
+          resolve(e.target.result);
+        }
+      })
+    },
   },
 };
 </script>

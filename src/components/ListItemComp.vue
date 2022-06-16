@@ -2,7 +2,7 @@
   <router-link :to="{ path: '/' + type + '/' + id }">
     <div id="listItem" class="listItem" :class="type !== 'inspection' ? ' no-gap' : ''">
       <div class="content" :class="subtitle ? 'vertical-center' : ''">
-        <div class="item-title">{{ title.substring(0, 20) + "..." }}</div>
+        <div class="item-title">{{ title }}</div>
         <div class="item-subtitle">{{ subtitle }}</div>
       </div>
       <div :class="'download ' + type" v-if="type === 'inspection'">
@@ -29,7 +29,7 @@ export default {
       Icons: {
         arrowIosForwardFill,
         arrowDownload48Filled
-      }
+      },
     };
   },
 

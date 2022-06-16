@@ -1,38 +1,35 @@
 <template>
-  <v-offline class="message"
-      @detected-condition="checkOnlineStatus"
-      online-class="online"
-      offline-class="offline"
-  >
-    <template v-if="online">
-      <div class="message-container">
-        U bent momenteel online
-      </div>
-    </template>
-    <template v-if="!online">
-      <div class="message-container">
-        U bent momenteel offline
-      </div>
-    </template>
-  </v-offline>
-  <!--  <writeToLocal></writeToLocal>-->
+  <div class="message">
+    <div v-if="!isOffline" class="message-container online">
+      U bent momenteel online
+    </div>
+    <div  v-if="isOffline" class="message-container offline">
+      U bent momenteel offline
+    </div>
+  </div>
 </template>
 
 <script>
 // import writeToLocal from "@/components/WriteToLocal";
-import { VOffline } from "v-offline";
 
 
 export default {
   name: "OfflineMessage",
   components: {
     // writeToLocal,
-    VOffline,
   },
   data() {
     return {
-      online: true,
+      isOffline: !navigator.onLine
     };
+  },
+  mounted () {
+    window.addEventListener("offline", () => {
+      this.isOffline = true;
+    });
+    window.addEventListener("online", () => {
+      this.isOffline = false;
+    });
   },
   methods: {
     checkOnlineStatus(e) {
@@ -50,15 +47,15 @@ export default {
   justify-content: center;
 }
 
-.offline .message-container {
+.message-container.offline {
   background-color: #c4c4c4;
 }
 
-.online .message-container {
+.message-container.online {
   background-color: #fca311;
 }
 
-.message .message-container {
+.message-container {
   padding: 5px 16px;
   border-radius: 20px;
   color: #14213d;

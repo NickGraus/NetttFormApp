@@ -15,7 +15,7 @@ export default {
     method: { type: Function },
   },
   mounted() {
-    this.method();
+    // this.method();
   },
 
   methods: {},
