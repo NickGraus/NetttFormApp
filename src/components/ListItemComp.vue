@@ -1,16 +1,18 @@
 <template>
-  <router-link :to="{ path: '/' + type + '/' + id }">
     <div id="listItem" class="listItem" :class="type !== 'inspection' ? ' no-gap' : ''">
-      <div class="content" :class="subtitle ? 'vertical-center' : ''">
-        <div class="item-title">{{ title }}</div>
-        <div class="item-subtitle">{{ subtitle }}</div>
-      </div>
-      <div :class="'download ' + type" v-if="type === 'inspection'">
+      <router-link :to="{ path: '/' + type + '/' + id }">
+        <div class="content" :class="subtitle ? 'vertical-center' : ''">
+          <div class="item-title">{{ title }}</div>
+          <div class="item-subtitle">{{ subtitle }}</div>
+        </div>
+      </router-link>
+      <div :class="'download ' + type" v-if="type === 'inspection'" @click="buttonClickHandler">
         <Icon class="icon blue" :icon="Icons.arrowDownload48Filled" />
       </div>
-      <Icon class="icon blue" :icon="Icons.arrowIosForwardFill" />
+      <router-link :to="{ path: '/' + type + '/' + id }">
+        <Icon class="icon blue" :icon="Icons.arrowIosForwardFill" />
+      </router-link>
     </div>
-  </router-link>
 </template>
 
 <script>
@@ -40,7 +42,14 @@ export default {
     type: String,
   },
 
-  methods: {},
+  mounted() {
+  },
+
+  methods: {
+    buttonClickHandler() {
+      this.$emit("onSelect")
+    },
+  },
 };
 </script>
 

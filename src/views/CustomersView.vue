@@ -1,8 +1,7 @@
 <template>
   <div class="customers">
-    <button @click="saveCustomer">Save</button>
+<!--    <button @click="saveCustomer">Save</button>-->
       <div v-if="!isOffline" class="online">
-        Nu ben ik online
         <ListItem
             v-for="customer in customers"
             :key="customer.id"
@@ -12,13 +11,17 @@
         ></ListItem>
       </div>
       <div v-if="isOffline" class="offline">
-        <ListItem
-            v-for="customer in localCustomers"
-            :key="customer.id"
-            :id="customer.id"
-            :title="customer.name"
-            type="customer"
-        ></ListItem>
+        <div v-if="localCustomers.length > 0" class="list">
+          <ListItem
+              v-for="customer in localCustomers.slice(0, 0)"
+              :key="customer.id"
+              :id="customer.id"
+              :title="customer.name"
+              type="customer"
+          >
+          </ListItem>
+        </div>
+        <div v-else class="note">Het was niet mogelijk om de data offline weer te geven</div>
       </div>
   </div>
 </template>
@@ -26,14 +29,11 @@
 <script>
 import ListItem from "@/components/ListItemComp";
 import axios from 'axios';
-import Button from  "@/components/BtnComp"
 
 export default {
   name: "InspectionView",
   components: {
     ListItem,
-    Button,
-
   },
   data() {
     return {
@@ -52,7 +52,7 @@ export default {
     this.localCustomers = await this.getCustomers();
   },
 
-  mounted() {
+   mounted() {
     axios
         .get("https://app-api.nettt.nl/api/customer")
         .then(response => (this.customers = response.data.data))
