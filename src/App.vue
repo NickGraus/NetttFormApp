@@ -63,8 +63,10 @@ export default {
         }
 
         db.onupgradeneeded = e => {
+          e.target.result.deleteObjectStore("inspections");
           e.target.result.createObjectStore("inspections", {keyPath: "key"});
-          e.target.result.createObjectStore("customers", {keyPath: "key"});
+          e.target.result.deleteObjectStore("customers");
+          e.target.result.createObjectStore("customers", {keyPath: "key", autoIncrement: true});
         }
       });
     },

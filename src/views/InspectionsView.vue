@@ -1,6 +1,9 @@
 <template>
   <div class="list">
     <div v-if="!isOffline" class="online">
+      <div v-if="items.length <= 0">
+        We couldn't get the inspections to load.
+      </div>
     <ListItem
       v-for="item in items"
       :key="item.id"
@@ -12,6 +15,9 @@
     ></ListItem>
     </div>
     <div v-if="isOffline" class="offline">
+      <div v-if="offlineItems.length <= 0">
+        You don't have any inspections available offline
+      </div>
       <ListItem
       v-for="offlineItem in offlineItems"
       :key="offlineItem.id"
@@ -77,9 +83,6 @@ export default {
     },
 
     async onSelect(item) {
-      this.offlineItems.push(item)
-      console.log(this.offlineItems)
-
       return new Promise((resolve, reject) => {
         let transaction = this.database.transaction('inspections', 'readwrite');
         transaction.oncomplete = e => {

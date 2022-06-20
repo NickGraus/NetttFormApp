@@ -15,6 +15,7 @@
         <Icon class="icon" :icon="icons.save24Regular" />
       </button>
     </form>
+    <button @click="createCustomer">Save</button>
   </div>
 </template>
 
@@ -47,11 +48,40 @@ export default {
       },
     };
   },
+
+  props: {
+    getDatabase: { type: Function },
+  },
+
+  async created() {
+    this.database = await this.getDatabase();
+    },
+
   methods: {
-    createCustomer() {
-      axios.post("https://app-api.nettt.nl/api/customer", this.customer)
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error))
+    async createCustomer() {
+      return new Promise((resolve, reject) => {
+        let countRequest = "";
+        let transaction = this.database.transaction('customers', 'readwrite');
+        transaction.oncomplete = e => {
+          resolve();
+        }
+        countRequest = transaction.objectStore('customers').count();
+        countRequest.onsuccess = () => {
+          transaction.objectStore('customers').put({
+            key: countRequest.result + 1,
+            name: this.customer.name,
+            address: this.customer.address,
+            city: this.customer.city,
+            country: this.customer.country,
+            email: this.customer.email,
+          })
+        }
+
+
+      })
+      // axios.post("https://app-api.nettt.nl/api/customer", this.customer)
+      //     .then((response) => console.log(response))
+      //     .catch((error) => console.log(error))
     }
   }
 };

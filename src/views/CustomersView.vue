@@ -2,6 +2,9 @@
   <div class="customers">
     <button @click="saveCustomer">Save</button>
       <div v-if="!isOffline" class="online">
+        <div v-if="customers.length <= 0">
+          We couldn't get the customers to load.
+        </div>
         <ListItem
             v-for="customer in customers"
             :key="customer.id"
@@ -21,8 +24,9 @@
           >
           </ListItem>
         </div>
-        <div v-else class="note">Het was niet mogelijk om de data offline weer te geven</div>
-      </div>
+        <div v-if="localCustomers.length <= 0">
+          We couldn't get the customers to load.
+        </div>      </div>
   </div>
 </template>
 
