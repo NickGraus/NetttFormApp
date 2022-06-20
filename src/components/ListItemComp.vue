@@ -6,8 +6,9 @@
           <div class="item-subtitle">{{ subtitle }}</div>
         </div>
       </router-link>
-      <div :class="'download ' + type" v-if="type === 'inspection'" @click="buttonClickHandler">
-        <Icon class="icon blue" :icon="Icons.arrowDownload48Filled" />
+      <div :class="'download ' + type" v-if="type === 'inspection'" @click="buttonClickHandler(); downloaded = !downloaded">
+        <Icon v-if="!downloaded" class="icon blue" :icon="Icons.arrowDownload48Filled" />
+        <Icon v-else-if="downloaded" class="icon blue" :icon="Icons.checkIcon" />
       </div>
       <router-link :to="{ path: '/' + type + '/' + id }">
         <Icon class="icon blue" :icon="Icons.arrowIosForwardFill" />
@@ -19,6 +20,8 @@
 import { Icon } from '@iconify/vue';
 import arrowIosForwardFill from '@iconify-icons/eva/arrow-ios-forward-fill';
 import arrowDownload48Filled from '@iconify-icons/fluent/arrow-download-48-filled';
+import checkIcon from '@iconify-icons/bi/check';
+
 
 
 export default {
@@ -30,7 +33,9 @@ export default {
     return {
       Icons: {
         arrowIosForwardFill,
-        arrowDownload48Filled
+        arrowDownload48Filled,
+        checkIcon,
+        downloaded: false
       },
     };
   },
@@ -40,6 +45,7 @@ export default {
     subtitle: String,
     id: Number,
     type: String,
+    downloaded: Boolean,
   },
 
   mounted() {

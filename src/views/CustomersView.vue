@@ -1,6 +1,6 @@
 <template>
   <div class="customers">
-<!--    <button @click="saveCustomer">Save</button>-->
+    <button @click="saveCustomer">Save</button>
       <div v-if="!isOffline" class="online">
         <ListItem
             v-for="customer in customers"
@@ -13,7 +13,7 @@
       <div v-if="isOffline" class="offline">
         <div v-if="localCustomers.length > 0" class="list">
           <ListItem
-              v-for="customer in localCustomers.slice(0, 0)"
+              v-for="customer in localCustomers"
               :key="customer.id"
               :id="customer.id"
               :title="customer.name"

@@ -19,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@iconify-icons/bi": "^1.2.4",
     "@iconify-icons/carbon": "^1.2.6",
     "@iconify-icons/ep": "^1.2.6",
     "@iconify-icons/eva": "^1.2.2",

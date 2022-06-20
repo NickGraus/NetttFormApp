@@ -32,6 +32,8 @@
 import { Icon } from '@iconify/vue';
 import arrowIosDownwardFill from '@iconify-icons/eva/arrow-ios-downward-fill';
 import arrowIosUpwardFill from '@iconify-icons/eva/arrow-ios-upward-fill';
+import axios from "axios";
+
 
 import Button from "./BtnComp.vue";
 import InputField from "./InputfieldComp.vue";
@@ -57,7 +59,12 @@ export default {
     fetch("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
         .then((res) => res.json())
         .then((data) => (this.fields = data.data.sections))
-        .catch((err) => console.log(err.message));  },
+        .catch((err) => console.log(err.message));
+
+  axios
+  .get("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
+      .then(data => (this.fields = data.data.sections))
+},
 
   props: {
     title: String,

@@ -2,7 +2,7 @@
   <div class="list">
     <div v-if="!isOffline" class="online">
     <ListItem
-      v-for="item in items.slice(0, 20)"
+      v-for="item in items"
       :key="item.id"
       :id="item.id"
       :title="item.name"
@@ -12,7 +12,15 @@
     ></ListItem>
     </div>
     <div v-if="isOffline" class="offline">
-      Er is momenteel geen lijst beschikbaar
+      <ListItem
+      v-for="offlineItem in offlineItems"
+      :key="offlineItem.id"
+      :id="offlineItem.id"
+      :title="offlineItem.name"
+      subtitle=""
+      type="inspection"
+      >
+      </ListItem>
     </div>
     <div v-else class="note">Het was niet mogelijk om de data offline weer te geven</div>
   </div>
@@ -39,6 +47,7 @@ export default {
 
   async created() {
     this.database = await this.getDatabase();
+    this.offlineItems = await this.getLocalInspections();
   },
 
   mounted() {
@@ -80,10 +89,23 @@ export default {
           transaction.objectStore('inspections').put({
             key: item.id,
             name: item.name,
+            customer_id: item.customer_id,
+            customer_name: item.customer_name,
           })
         })
       })
-    }
+    },
+    async getLocalInspections() {
+      return new Promise((resolve) => {
+        let transaction = this.database.transaction("inspections", "readonly");
+        let inspectionsStore = transaction.objectStore("inspections")
+        let inspections = inspectionsStore.getAll();
+
+        inspections.onsuccess = e => {
+          resolve(e.target.result);
+        }
+      })
+    },
   },
 };
 </script>
