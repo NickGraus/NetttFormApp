@@ -1,6 +1,7 @@
 <template>
   <div class="customers">
     <button @click="saveCustomer">Save</button>
+    <button @click="syncCustomers">Sync</button>
       <div v-if="!isOffline" class="online">
         <div v-if="customers.length <= 0">
           We couldn't get the customers to load.
@@ -26,7 +27,8 @@
         </div>
         <div v-if="localCustomers.length <= 0">
           We couldn't get the customers to load.
-        </div>      </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -42,6 +44,7 @@ export default {
   data() {
     return {
       customers: [],
+      customer: [],
       localCustomers: [],
       database: null,
       isOffline: !navigator.onLine
@@ -69,32 +72,63 @@ export default {
     });
   },
 
+  computed: {
+    filteredCustomers() {
+      return this.customers.filter(customer => customer.name.toLowerCase().includes(this.search.toLowerCase()));
+    }
+  },
+
   methods: {
     async saveCustomer() {
+      axios
+          .put("https://app-api.nettt.nl/api/customer/", this.customer)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error))
       return new Promise((resolve, reject) => {
         let transaction = this.database.transaction('customers', 'readwrite');
         transaction.oncomplete = e => {
           resolve();
         }
+
+        // console.log(this.customers[122])
         this.customers.forEach(customer => {
-          transaction.objectStore('customers').add({
+          transaction.objectStore('customers').put({
             key: customer.id,
             name: customer.name,
+            // address: customer.address,
         })
-        })
+      })
       })
     },
     async getCustomers() {
       return new Promise((resolve) => {
         let transaction = this.database.transaction("customers", "readonly");
-        let customerStore = transaction.objectStore("customers")
-        let customers = customerStore.getAll();
+        let customers = transaction.objectStore("customers").getAll();
 
         customers.onsuccess = e => {
           resolve(e.target.result);
         }
       })
     },
+    async syncCustomers() {
+      return new Promise((resolve, reject) => {
+        let transaction = this.database.transaction('customers', 'readwrite');
+        transaction.oncomplete = e => {
+          resolve();
+        }
+
+        let customers = transaction.objectStore('customers').getAll();
+
+        customers.onsuccess = e => {
+          resolve(e.target.result);
+        }
+      })
+
+      axios
+          .put("https://app-api.nettt.nl/api/customer/", this.customers)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error))
+    }
   },
 };
 </script>

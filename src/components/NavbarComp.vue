@@ -43,7 +43,7 @@ export default {
   width: 100%;
   background-color: #14213d;
   color: #ffffff;
-  padding: 16px 0;
+  padding: 16px 0 32px;
   position: fixed;
   bottom: 0;
 }

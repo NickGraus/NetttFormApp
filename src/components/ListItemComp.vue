@@ -35,7 +35,6 @@ export default {
         arrowIosForwardFill,
         arrowDownload48Filled,
         checkIcon,
-        downloaded: false
       },
     };
   },
@@ -67,6 +66,7 @@ export default {
   grid-column-gap: 16px;
   border-bottom: 1px solid #fca311;
   align-items: center;
+  min-height: 52px;
 }
 
 .no-gap {

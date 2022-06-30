@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <SplashView :isLoading="isLoading"></SplashView>
-    <Topbar title="Titel" state="search" />
+    <Topbar title="Titel" state="search" @searched="onClickSearch"/>
     <div class="main">
       <offline-message></offline-message>
       <AddButton />
       <router-view :getDatabase="getDatabase"></router-view>
     </div>
     <Navbar />
-
   </div>
 </template>
 
@@ -34,21 +33,29 @@ export default {
       database: null,
     };
   },
+
+  props: {
+    title: String,
+    description: String,
+    onSearch: { type: Function },
+  },
+
   async created() {
     this.database = await this.getDatabase();
     // this.saveCustomer();
   },
+
   mounted() {
     setTimeout(() => {
       this.isLoading = false;
     }, 3000);
   },
 
-  props: {
-    title: String,
-    description: String,
-  },
   methods: {
+    onClickSearch(value) {
+      this.search = value;
+    },
+
     async getDatabase() {
       return new Promise((resolve, reject) => {
         let db = window.indexedDB.open("NetttFormAppDB");
@@ -58,14 +65,12 @@ export default {
         };
 
         db.onsuccess = e => {
-          console.log("db.onsucces", e)
+          // console.log("db.onsucces", e)
           resolve(e.target.result);
         }
 
         db.onupgradeneeded = e => {
-          e.target.result.deleteObjectStore("inspections");
           e.target.result.createObjectStore("inspections", {keyPath: "key"});
-          e.target.result.deleteObjectStore("customers");
           e.target.result.createObjectStore("customers", {keyPath: "key", autoIncrement: true});
         }
       });

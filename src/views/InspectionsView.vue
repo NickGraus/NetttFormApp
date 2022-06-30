@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="list">
     <div v-if="!isOffline" class="online">
       <div v-if="items.length <= 0">
@@ -83,6 +83,8 @@ export default {
     },
 
     async onSelect(item) {
+      this.offlineItems.push(item)
+
       return new Promise((resolve, reject) => {
         let transaction = this.database.transaction('inspections', 'readwrite');
         transaction.oncomplete = e => {

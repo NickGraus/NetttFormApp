@@ -31,12 +31,12 @@ export default {
 <style>
 .add {
   position: fixed;
-  bottom: 80px;
+  bottom: 100px;
   right: 20px;
   background-color: #fca311;
-  height: 44px;
-  width: 44px;
-  border-radius: 22px;
+  height: 56px;
+  width: 56px;
+  border-radius: 56px;
   padding: 0;
   display:flex;
   justify-content: center;
@@ -44,7 +44,7 @@ export default {
 }
 
 .add svg {
-  height: 24px;
-  width: 24px;
+  height: 32px;
+  width: 32px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="customer-new">
     <form @submit.prevent="createCustomer">
-      <label for="name">name</label>
+      <label for="name">Naam:</label>
       <input type="text" id="name" v-model="customer.name">
       <label for="address">Adres:</label>
       <input type="text" id="address" v-model="customer.address">
@@ -9,13 +9,10 @@
       <input type="text" id="city" v-model="customer.city">
       <label for="country">Land:</label>
       <input type="text" id="country" v-model="customer.country">
-      <label for="email">E-mail:</label>
-      <input type="text" id="email" v-model="customer.email">
-      <button class="scrum-btn vertical-center">
-        <Icon class="icon" :icon="icons.save24Regular" />
-      </button>
+        <button class="scrum-btn vertical-center">
+          <Icon class="icon" :icon="icons.save24Regular" />
+        </button>
     </form>
-    <button @click="createCustomer">Save</button>
   </div>
 </template>
 
@@ -40,12 +37,12 @@ export default {
         address: "",
         city: "",
         country: "",
-        email: "",
       },
       icons: {
         save24Regular,
         trashBinOutline,
       },
+      isOffline: !navigator.onLine,
     };
   },
 
@@ -59,13 +56,18 @@ export default {
 
   methods: {
     async createCustomer() {
+      console.log(this.customer)
+      axios.post("https://app-api.nettt.nl/api/customer", this.customer)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error))
+
       return new Promise((resolve, reject) => {
-        let countRequest = "";
         let transaction = this.database.transaction('customers', 'readwrite');
         transaction.oncomplete = e => {
           resolve();
         }
-        countRequest = transaction.objectStore('customers').count();
+
+        let countRequest = transaction.objectStore('customers').count();
         countRequest.onsuccess = () => {
           transaction.objectStore('customers').put({
             key: countRequest.result + 1,
@@ -73,15 +75,13 @@ export default {
             address: this.customer.address,
             city: this.customer.city,
             country: this.customer.country,
-            email: this.customer.email,
           })
+          this.customer.name = "";
+          this.customer.address = "";
+          this.customer.city = "";
+          this.customer.country = "";
         }
-
-
       })
-      // axios.post("https://app-api.nettt.nl/api/customer", this.customer)
-      //     .then((response) => console.log(response))
-      //     .catch((error) => console.log(error))
     }
   }
 };

@@ -9,18 +9,15 @@
     </div>
     <div
       class="title"
-      v-if="
-        this.$route.name === 'Inspections' || this.$route.name === 'Customers'
-      "
-    >
+      v-if="this.$route.name">
       {{ this.$route.name }}
     </div>
     <div class="title" v-else>
       {{ title }}
     </div>
     <div class="searchForm" v-if="state === 'search'">
-      <InputField fieldType="text" placeholder="zoeken" />
-      <button class="searchButton" type="submit">
+      <input type="text" v-model="search">
+      <button class="searchButton" @click="onSearch">
         <Icon class="icon" :icon="icons.searchIcon" />
       </button>
     </div>
@@ -44,6 +41,7 @@ export default {
   },
   data() {
     return {
+      search: "",
       icons: {
         searchIcon,
         arrowLeftBold,
@@ -60,6 +58,9 @@ export default {
     goBack() {
       return this.$router.go(-1);
     },
+    onSearch() {
+      this.$emit('searched', this.search)
+    }
   },
 };
 </script>
@@ -70,7 +71,6 @@ export default {
   color: #14213d;
   padding: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  position: relative;
   display: block;
   overflow: auto;
   position: fixed;
