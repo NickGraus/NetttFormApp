@@ -1,35 +1,54 @@
-# NetttStatusApp
+# Nettt Form App
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a small prototype to test if the requirements listed by Nettt Interactie Media can be implemented in a Vue.js project combined with a Progressive Web App.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
 
-## Customize configuration
+## Documentation
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[Documentation](https://linktodocumentation)
 
-## Project Setup
 
-```sh
-npm install
+## Installation
+
+Install Vue CLI with npm
+```bash
+  npm install -g @vue/cli
+```
+## Run Locally
+
+Clone the project
+```bash
+  git clone https://github.com/NickGraus/NetttFormApp
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+Go to the project directory
+```bash
+  cd NetttFormApp
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
+Install dependencies
+```bash
+  npm install --save axios
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+Start the server
+```bash
+  npm run serve
 ```
+
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run build --production
+```
+
+
+## Authors
+
+- [@NickGraus](https://github.com/NickGraus/)
+
+
