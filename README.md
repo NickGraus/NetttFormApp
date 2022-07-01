@@ -3,12 +3,6 @@
 This is a small prototype to test if the requirements listed by Nettt Interactie Media can be implemented in a Vue.js project combined with a Progressive Web App.
 
 
-
-## Documentation
-
-[Documentation](https://linktodocumentation)
-
-
 ## Installation
 
 Install Vue CLI with npm
