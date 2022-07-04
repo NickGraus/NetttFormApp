@@ -1,34 +1,49 @@
 <template>
   <div id="navbar" class="navbar">
     <div class="flexbox">
-      <div class="menu-item"></div>
-      <div class="menu-item"></div>
+      <router-link to="/">
+        <Icon class="icon" :icon="icons.library24Regular"/>
+      </router-link>
+      <router-link to="/customers">
+        <Icon class="icon" :icon="icons.usersIcon" />
+      </router-link>
     </div>
   </div>
 </template>
 
-
-
 <script>
+import { Icon } from '@iconify/vue';
+
+import library24Regular from '@iconify-icons/fluent/library-24-regular';
+import usersIcon from '@iconify-icons/ph/users';
+
+
 export default {
-  name: 'navbarComp',
+  name: "navbarComp",
+  components: {
+    Icon,
+  },
   data() {
     return {
+      icons: {
+        library24Regular,
+        usersIcon,
+      },
     };
   },
 
   props: {},
 
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style>
 .navbar {
   width: 100%;
-  background-color: #14213D;
+  background-color: #14213d;
   color: #ffffff;
-  padding: 16px 0;
+  padding: 16px 0 32px;
   position: fixed;
   bottom: 0;
 }
@@ -38,9 +53,18 @@ export default {
   justify-content: space-evenly;
 }
 
-.menu-item {
+.icon {
   height: 24px;
   width: 24px;
-  background-color: #ffffff;
+  color: #ffffff;
+}
+
+.navbar .menu-item {
+  color: #ffffff;
+}
+
+.navbar .menu-item:hover,
+.menu-item:active {
+  color: #fca311;
 }
 </style>

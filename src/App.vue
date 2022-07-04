@@ -1,60 +1,107 @@
 <template>
   <div id="app">
-    <Topbar title="Titel" state="search" />
+    <SplashView :isLoading="isLoading"></SplashView>
+    <Topbar title="Titel" state="search" @searched="onClickSearch"/>
     <div class="main">
-      <ListItem title="Titel" subtitle="" />
-      <CollapseItem />
+      <offline-message></offline-message>
+      <AddButton />
+      <router-view :getDatabase="getDatabase"></router-view>
     </div>
     <Navbar />
   </div>
-
-
 </template>
 
 <script>
+import SplashView from "./views/SplashView.vue";
 import Navbar from "./components/NavbarComp.vue";
 import Topbar from "./components/TopbarComp.vue";
-import ListItem from "./components/ListItemComp.vue";
-import CollapseItem from "./components/CollapseItemComp.vue";
+import AddButton  from "./components/AddComp.vue";
+import OfflineMessage from "./components/OfflineMessage.vue"
 
 export default {
   name: "App",
   components: {
+    SplashView,
     Topbar,
     Navbar,
-    ListItem,
-    CollapseItem,
+    AddButton,
+    OfflineMessage
   },
   data() {
-    return {};
+    return {
+      isLoading: true,
+      database: null,
+    };
   },
 
   props: {
     title: String,
     description: String,
+    onSearch: { type: Function },
   },
 
-  methods: {},
+  async created() {
+    this.database = await this.getDatabase();
+    // this.saveCustomer();
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+  },
+
+  methods: {
+    onClickSearch(value) {
+      this.search = value;
+    },
+
+    async getDatabase() {
+      return new Promise((resolve, reject) => {
+        let db = window.indexedDB.open("NetttFormAppDB");
+
+        db.onerror = e => {
+          reject("Error with opening the database.")
+        };
+
+        db.onsuccess = e => {
+          // console.log("db.onsucces", e)
+          resolve(e.target.result);
+        }
+
+        db.onupgradeneeded = e => {
+          e.target.result.createObjectStore("inspections", {keyPath: "key"});
+          e.target.result.createObjectStore("customers", {keyPath: "key", autoIncrement: true});
+        }
+      });
+    },
+  }
 };
 </script>
 
 <style>
-
-
 @font-face {
   font-family: "SF Pro Text";
-  src: local("SF Pro Text"), url("./fonts/SFProText-Semibold.ttf") format("truetype");
+  src: local("SF Pro Text"),
+    url("./fonts/SFProText-Semibold.ttf") format("truetype");
 }
-
 
 body {
   margin: 0;
 }
- #app {
-   font-family: "SF Pro Text";
- }
 
- .main {
-   padding: 16px;
- }
+a {
+  text-decoration: none;
+}
+#app {
+  font-family: "SF Pro Text";
+}
+
+.main {
+  padding: 140px 16px 16px;
+}
+
+.jantje {
+  margin-top: 200px;
+}
 </style>

@@ -2,56 +2,84 @@
   <div id="collapseItem" class="collapseItem" :class="state">
     <div class="grid">
       <div class="content">
-        <div class="collapse item-title">{{ title }}Joa</div>
+        <div class="collapse item-title">{{ title }}</div>
       </div>
-      <Button v-if="isShow" btnName="Oplaan" state="primary"/>
+      <Button v-if="isShow" btnName="Oplaan" state="primary" />
       <div class="details" @click="isShow = !isShow">
-        <div v-if="!isShow" class="icon">V</div>
-        <div v-else class="icon upside-down">V</div>
+        <div v-if="!isShow" class="icon">
+          <Icon class="icon blue" :icon="icons.arrowIosDownwardFill" />
+        </div>
+        <div v-else class="icon">
+          <Icon class="icon blue" :icon="icons.arrowIosUpwardFill" />
+        </div>
       </div>
     </div>
     <div class="collapsed" v-if="isShow">
-      <InputField inputTitle="Datum uitvoering" fieldType="text" />
-      <InputField inputTitle="Uitvoerder" fieldType="text" />
-      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="ja" />
-      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="nee" />
-      <InputField inputTitle="Uitvoerder" fieldType="radio" name="test" label="misschien" />
+      <InputField v-for="field in fields" :inputTitle="field.name" :placeholder="field.name" fieldType="text" />
+      <InputField inputTitle="Uitvoerder" placeholder="" fieldType="text" />
+      <InputField
+        inputTitle="Uitvoerder"
+        fieldType="radio"
+        name="test"
+        label="ja"
+      />
+      <!--      <InputField inputTitle="Uitvoerder" fieldType="checkbox" name="test" label="misschien" />-->
     </div>
   </div>
 </template>
 
-
-
 <script>
+import { Icon } from '@iconify/vue';
+import arrowIosDownwardFill from '@iconify-icons/eva/arrow-ios-downward-fill';
+import arrowIosUpwardFill from '@iconify-icons/eva/arrow-ios-upward-fill';
+import axios from "axios";
+
+
 import Button from "./BtnComp.vue";
 import InputField from "./InputfieldComp.vue";
 
 export default {
   name: "collapseditemComp",
   components: {
+    Icon,
     Button,
     InputField,
   },
   data() {
     return {
+      icons: {
+        arrowIosDownwardFill,
+        arrowIosUpwardFill,
+      },
       isShow: false,
+      inspection_id: this.$route.params.id,
     };
   },
+  mounted() {
+    fetch("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
+        .then((res) => res.json())
+        .then((data) => (this.fields = data.data.sections))
+        .catch((err) => console.log(err.message));
+
+  axios
+  .get("https://app-api.nettt.nl/api/inspection/" + this.inspection_id)
+      .then(data => (this.fields = data.data.sections))
+},
 
   props: {
     title: String,
     subtitle: String,
+    state: String,
   },
 
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style>
-
 .collapseItem {
   padding: 8px 16px;
-  border-bottom: 1px solid #FCA311;
+  border-bottom: 1px solid #fca311;
 }
 
 .grid {
@@ -62,19 +90,6 @@ export default {
 
 .collapsed {
   margin-top: 16px;
-}
-
-.icon {
-  margin-right: -16px;
-}
-.upside-down {
-  display: inline;
-  -moz-transform: scale(-1, -1);
-  -webkit-transform: scale(-1, -1);
-  -o-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-  margin-right: 0;
 }
 
 </style>
